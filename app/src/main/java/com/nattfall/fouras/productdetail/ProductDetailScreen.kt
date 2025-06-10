@@ -1,7 +1,5 @@
 package com.nattfall.fouras.productdetail
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,16 +18,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nattfall.fouras.R
 import com.nattfall.fouras.home.data.ProductData
 import com.nattfall.fouras.ui.elements.AppScaffold
+import com.nattfall.fouras.ui.elements.Image.Decorative
 import com.nattfall.fouras.ui.elements.LoadingResourceIndicator
 import com.nattfall.fouras.ui.theme.AppButton
 import com.nattfall.fouras.ui.theme.FourasTheme
-import java.util.UUID
+import com.nattfall.fouras.ui.util.ScreenPreview
 
 @Composable
 fun ProductDetailScreen(
@@ -76,10 +76,9 @@ private fun ProductDetailView(
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
                 Column(modifier = Modifier.fillMaxWidth()) {
-                    Image(
+                    Decorative(
                         modifier = Modifier.fillMaxWidth(),
                         painter = painterResource(productData.image),
-                        contentDescription = null,
                         contentScale = ContentScale.FillWidth,
                     )
 
@@ -100,6 +99,8 @@ private fun ProductDetailView(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
+                    Text(text = "$${productData.price} ${productData.currency}")
+
                     AppButton.PrimaryButton(onClick = {
                         if (isInCheckout) {
                             onRemoveFromCheckout(productData)
@@ -108,15 +109,15 @@ private fun ProductDetailView(
                         }
                     }) {
                         if (isInCheckout) {
-                            Text(text = "Remove from cart")
+                            Text(text = stringResource(R.string.remove_from_cart))
                         } else {
-                            Text(text = "Add to cart")
+                            Text(text = stringResource(R.string.add_to_cart))
                         }
                     }
 
-                    if(isInCheckout){
+                    if (isInCheckout) {
                         AppButton.SecondaryButton(onClick = onCheckout) {
-                            Text(text = "Checkout")
+                            Text(text = stringResource(R.string.checkout))
                         }
                     }
                 }
@@ -125,7 +126,7 @@ private fun ProductDetailView(
     }
 }
 
-@Preview
+@Preview()
 @Composable
 private fun ProductDetailViewPreview() {
     val product = ProductData(
@@ -140,16 +141,14 @@ private fun ProductDetailViewPreview() {
         price = 149.99f,
     )
 
-    FourasTheme {
-        Surface {
-            ProductDetailView(
-                productData = product,
-                onBack = {},
-                onCheckout = {},
-                onAddToCart = {},
-                onRemoveFromCheckout = {},
-                isInCheckout = false,
-            )
-        }
+    ScreenPreview(true) {
+        ProductDetailView(
+            productData = product,
+            onBack = {},
+            onCheckout = {},
+            onAddToCart = {},
+            onRemoveFromCheckout = {},
+            isInCheckout = false,
+        )
     }
 }

@@ -22,14 +22,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nattfall.fouras.R
 import com.nattfall.fouras.home.data.ProductData
 import com.nattfall.fouras.ui.elements.AppScaffold
+import com.nattfall.fouras.ui.elements.Image.Decorative
 import com.nattfall.fouras.ui.theme.AppButton
 import com.nattfall.fouras.ui.theme.FourasTheme
+import com.nattfall.fouras.ui.util.ScreenPreview
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import java.util.UUID
@@ -67,7 +70,7 @@ private fun CheckoutView(
     onBack: () -> Unit,
     onCheckout: () -> Unit,
 ) {
-    AppScaffold(title = "Checkout", onBack = onBack) { padding ->
+    AppScaffold(title = stringResource(R.string.checkout), onBack = onBack) { padding ->
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.SpaceBetween,
@@ -96,12 +99,16 @@ private fun CheckoutView(
             ) {
                 HorizontalDivider()
 
-                val sum =
-                    DecimalFormat("0.00").format(checkoutItems.sumOf { product -> product.price.toDouble() })
-                Text("Total price: $sum")
+                val sum = DecimalFormat("0.00").format(
+                    checkoutItems.sumOf { product ->
+                        product.price.toDouble()
+                    }
+                )
+
+                Text(text = stringResource(R.string.total_price, sum))
 
                 AppButton.PrimaryButton(onClick = onCheckout) {
-                    Text(text = "Confirm")
+                    Text(text = stringResource(R.string.confirm))
                 }
             }
         }
@@ -115,10 +122,9 @@ private fun CheckoutProductItem(productData: ProductData) {
             .fillMaxWidth()
             .heightIn(max = 100.dp)
     ) {
-        Image(
+        Decorative(
             modifier = Modifier.clip(shape = RoundedCornerShape(12.dp)),
             painter = painterResource(productData.image),
-            contentDescription = null,
         )
 
         Column(
@@ -144,13 +150,11 @@ private fun CheckoutViewPreview() {
         )
     )
 
-    FourasTheme {
-        Surface {
-            CheckoutView(
-                onBack = {},
-                checkoutItems = checkoutProducts,
-                onCheckout = {},
-            )
-        }
+    ScreenPreview {
+        CheckoutView(
+            onBack = {},
+            checkoutItems = checkoutProducts,
+            onCheckout = {},
+        )
     }
 }

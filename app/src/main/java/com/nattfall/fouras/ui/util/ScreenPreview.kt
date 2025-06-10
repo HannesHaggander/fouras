@@ -7,8 +7,11 @@ import androidx.compose.ui.Modifier
 import com.nattfall.fouras.ui.theme.FourasTheme
 
 @Composable
-fun ScreenPreview(content: @Composable () -> Unit) {
-    FourasTheme {
+fun ScreenPreview(
+    darkTheme: Boolean = false,
+    content: @Composable () -> Unit,
+) {
+    FourasTheme(darkTheme = darkTheme) {
         Surface(modifier = Modifier.fillMaxSize()) {
             content()
         }

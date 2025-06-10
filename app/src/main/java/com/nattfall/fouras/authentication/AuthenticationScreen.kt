@@ -52,6 +52,7 @@ import androidx.compose.ui.unit.sp
 import com.nattfall.fouras.R
 import com.nattfall.fouras.ui.theme.AppButton
 import com.nattfall.fouras.ui.theme.FourasTheme
+import com.nattfall.fouras.ui.util.ScreenPreview
 
 @Composable
 fun AuthenticationScreen(
@@ -199,11 +200,9 @@ private fun AuthenticationView(
 @Preview
 @Composable
 private fun AuthenticationViewPreview() {
-    FourasTheme {
-        Surface {
-            AuthenticationView(
-                onLogin = { _, _ -> },
-            )
-        }
+    ScreenPreview {
+        AuthenticationView(
+            onLogin = { _, _ -> },
+        )
     }
 }

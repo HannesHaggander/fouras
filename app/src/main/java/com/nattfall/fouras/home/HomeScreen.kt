@@ -3,7 +3,6 @@ package com.nattfall.fouras.home
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,14 +29,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nattfall.fouras.R
 import com.nattfall.fouras.home.data.ProductData
+import com.nattfall.fouras.ui.elements.Image.Decorative
 import com.nattfall.fouras.ui.theme.AppButton
 import com.nattfall.fouras.ui.theme.FourasTheme
+import com.nattfall.fouras.ui.util.ScreenPreview
 import java.util.UUID
 
 @Composable
@@ -88,7 +90,10 @@ private fun HomeView(
                         horizontalArrangement = Arrangement.End,
                     ) {
                         IconButton(onSettings) {
-                            Icon(Icons.Default.Settings, contentDescription = "Settings")
+                            Icon(
+                                imageVector = Icons.Default.Settings,
+                                contentDescription = stringResource(R.string.description_settings)
+                            )
                         }
                     }
 
@@ -132,12 +137,11 @@ private fun ProductView(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Image(
+        Decorative(
             modifier = Modifier
                 .fillMaxWidth(fraction = 0.3f)
-                .clip(shape = RoundedCornerShape(8.dp)),
+                .clip(shape = RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp)),
             painter = painterResource(id = product.image),
-            contentDescription = null,
         )
 
         Column(
@@ -191,15 +195,13 @@ private fun HomeViewPreview() {
         ),
     )
 
-    FourasTheme {
-        Surface {
-            HomeView(
-                products = products,
-                checkoutVisible = true,
-                onProductClicked = {},
-                onSettings = {},
-                onCheckout = {},
-            )
-        }
+    ScreenPreview(true) {
+        HomeView(
+            products = products,
+            checkoutVisible = true,
+            onProductClicked = {},
+            onSettings = {},
+            onCheckout = {},
+        )
     }
 }
