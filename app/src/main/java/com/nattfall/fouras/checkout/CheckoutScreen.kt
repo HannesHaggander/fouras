@@ -29,6 +29,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.nattfall.fouras.R
 import com.nattfall.fouras.home.data.ProductData
 import com.nattfall.fouras.ui.elements.AppScaffold
+import com.nattfall.fouras.ui.elements.ContrastText
+import com.nattfall.fouras.ui.elements.ContrastType
 import com.nattfall.fouras.ui.elements.Image.Decorative
 import com.nattfall.fouras.ui.theme.AppButton
 import com.nattfall.fouras.ui.theme.FourasTheme
@@ -105,10 +107,16 @@ private fun CheckoutView(
                     }
                 )
 
-                Text(text = stringResource(R.string.total_price, sum))
+                ContrastText(
+                    text = stringResource(R.string.total_price, sum),
+                    contrastType = ContrastType.Surface,
+                )
 
                 AppButton.PrimaryButton(onClick = onCheckout) {
-                    Text(text = stringResource(R.string.confirm))
+                    ContrastText(
+                        text = stringResource(R.string.confirm, sum),
+                        contrastType = ContrastType.Primary,
+                    )
                 }
             }
         }
@@ -131,8 +139,14 @@ private fun CheckoutProductItem(productData: ProductData) {
             modifier = Modifier.padding(start = 12.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = productData.name)
-            Text(text = productData.price.toString())
+            ContrastText(
+                text = productData.name,
+                contrastType = ContrastType.Surface,
+            )
+            ContrastText(
+                text = productData.price.toString(),
+                contrastType = ContrastType.Surface,
+            )
         }
     }
 }

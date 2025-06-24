@@ -13,6 +13,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nattfall.fouras.R
 import com.nattfall.fouras.ui.elements.AppScaffold
+import com.nattfall.fouras.ui.elements.ContrastText
+import com.nattfall.fouras.ui.elements.ContrastType
 import com.nattfall.fouras.ui.theme.AppButton
 import com.nattfall.fouras.ui.util.ScreenPreview
 
@@ -44,7 +46,10 @@ private fun SettingsView(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             AppButton.PrimaryButton(onLogout) {
-                Text(stringResource(R.string.logout))
+                ContrastText(
+                    text = stringResource(R.string.logout),
+                    contrastType = ContrastType.Primary,
+                )
             }
         }
     }

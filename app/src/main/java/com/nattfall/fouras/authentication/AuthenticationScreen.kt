@@ -50,6 +50,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nattfall.fouras.R
+import com.nattfall.fouras.ui.elements.ContrastText
+import com.nattfall.fouras.ui.elements.ContrastType
 import com.nattfall.fouras.ui.theme.AppButton
 import com.nattfall.fouras.ui.theme.FourasTheme
 import com.nattfall.fouras.ui.util.ScreenPreview
@@ -98,10 +100,10 @@ private fun AuthenticationView(
     ) {
         Spacer(modifier = Modifier.fillMaxWidth())
 
-        Text(
+        ContrastText(
             text = stringResource(R.string.app_name),
-            color = MaterialTheme.colorScheme.onPrimary,
             style = MaterialTheme.typography.displayMedium,
+            contrastType = ContrastType.Primary,
         )
 
         Column(
@@ -128,8 +130,14 @@ private fun AuthenticationView(
                 OutlinedTextField(
                     value = username,
                     onValueChange = { username = it },
-                    label = { Text(stringResource(R.string.username)) },
+                    label = {
+                        ContrastText(
+                            text = stringResource(R.string.username),
+                            contrastType = ContrastType.Primary,
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth(),
+
                     shape = RoundedCornerShape(12.dp),
                     leadingIcon = {
                         Icon(
@@ -148,13 +156,19 @@ private fun AuthenticationView(
                     colors = OutlinedTextFieldDefaults.colors( // Custom colors for better integration
                         focusedBorderColor = MaterialTheme.colorScheme.primary,
                         unfocusedBorderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+
                     )
                 )
 
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text(text = stringResource(R.string.password)) },
+                    label = {
+                        ContrastText(
+                            text = stringResource(R.string.password),
+                            contrastType = ContrastType.Primary,
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp),
                     leadingIcon = {
@@ -186,8 +200,9 @@ private fun AuthenticationView(
                         onLogin(username, password)
                     }
                 ) {
-                    Text(
+                    ContrastText(
                         text = stringResource(R.string.login),
+                        contrastType = ContrastType.Surface,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium
                     )

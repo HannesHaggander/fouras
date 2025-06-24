@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            FourasTheme {
+            FourasTheme(darkTheme = true) {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     AppNavigation(modifier = Modifier
                         .fillMaxSize()

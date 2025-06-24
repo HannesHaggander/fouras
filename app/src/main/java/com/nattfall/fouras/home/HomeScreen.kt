@@ -36,6 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.nattfall.fouras.R
 import com.nattfall.fouras.home.data.ProductData
+import com.nattfall.fouras.ui.elements.ContrastText
+import com.nattfall.fouras.ui.elements.ContrastType
 import com.nattfall.fouras.ui.elements.Image.Decorative
 import com.nattfall.fouras.ui.theme.AppButton
 import com.nattfall.fouras.ui.theme.FourasTheme
@@ -114,7 +116,10 @@ private fun HomeView(
                     enter = slideInVertically(tween(250)),
                 ) {
                     AppButton.PrimaryButton(onCheckout) {
-                        Text("Checkout")
+                        ContrastText(
+                            text = "Checkout",
+                            contrastType = ContrastType.Primary,
+                        )
                     }
                 }
             }
@@ -150,19 +155,22 @@ private fun ProductView(
                 .padding(8.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text(
+            ContrastText(
                 text = product.name,
                 style = MaterialTheme.typography.titleMedium,
+                contrastType = ContrastType.Surface,
             )
-            Text(
+            ContrastText(
                 text = product.description,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
+                contrastType = ContrastType.Surface,
             )
-            Text(
+            ContrastText(
                 text = "${product.price} ${product.currency}",
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
+                contrastType = ContrastType.Surface,
             )
         }
     }

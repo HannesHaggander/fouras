@@ -25,6 +25,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.nattfall.fouras.R
 import com.nattfall.fouras.home.data.ProductData
 import com.nattfall.fouras.ui.elements.AppScaffold
+import com.nattfall.fouras.ui.elements.ContrastText
+import com.nattfall.fouras.ui.elements.ContrastType
 import com.nattfall.fouras.ui.elements.Image.Decorative
 import com.nattfall.fouras.ui.elements.LoadingResourceIndicator
 import com.nattfall.fouras.ui.theme.AppButton
@@ -83,12 +85,16 @@ private fun ProductDetailView(
                     )
 
                     Column(modifier = Modifier.padding(24.dp)) {
-                        Text(
+                        ContrastText(
                             text = productData.name,
                             style = MaterialTheme.typography.headlineMedium,
+                            contrastType = ContrastType.Surface,
                         )
 
-                        Text(text = productData.description)
+                        ContrastText(
+                            text = productData.description,
+                            contrastType = ContrastType.Surface,
+                        )
                     }
                 }
 
@@ -99,7 +105,10 @@ private fun ProductDetailView(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    Text(text = "$${productData.price} ${productData.currency}")
+                    ContrastText(
+                        text = "$${productData.price} ${productData.currency}",
+                        contrastType = ContrastType.Surface,
+                    )
 
                     AppButton.PrimaryButton(onClick = {
                         if (isInCheckout) {
@@ -108,16 +117,18 @@ private fun ProductDetailView(
                             onAddToCart(productData)
                         }
                     }) {
-                        if (isInCheckout) {
-                            Text(text = stringResource(R.string.remove_from_cart))
-                        } else {
-                            Text(text = stringResource(R.string.add_to_cart))
-                        }
+                        ContrastText(
+                            text = stringResource(if (isInCheckout) R.string.remove_from_cart else R.string.add_to_cart),
+                            contrastType = ContrastType.Primary,
+                        )
                     }
 
                     if (isInCheckout) {
                         AppButton.SecondaryButton(onClick = onCheckout) {
-                            Text(text = stringResource(R.string.checkout))
+                            ContrastText(
+                                text = stringResource(R.string.checkout),
+                                contrastType = ContrastType.Secondary,
+                            )
                         }
                     }
                 }

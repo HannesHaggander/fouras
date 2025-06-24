@@ -38,9 +38,10 @@ fun AppScaffold(
                 )
             }
 
-            Text(
+            ContrastText(
                 text = title,
                 style = MaterialTheme.typography.titleLarge,
+                contrastType = ContrastType.Background,
             )
         }
     }) { scaffoldPadding ->
