@@ -18,4 +18,7 @@ sealed interface AppDestination {
 
     @Serializable
     data object Settings : AppDestination
+
+    @Serializable
+    data object CheckoutComplete : AppDestination
 }

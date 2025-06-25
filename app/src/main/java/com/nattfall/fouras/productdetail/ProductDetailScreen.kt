@@ -127,7 +127,7 @@ private fun ProductDetailView(
                         AppButton.SecondaryButton(onClick = onCheckout) {
                             ContrastText(
                                 text = stringResource(R.string.checkout),
-                                contrastType = ContrastType.Secondary,
+                                contrastType = ContrastType.Background,
                             )
                         }
                     }
@@ -152,7 +152,7 @@ private fun ProductDetailViewPreview() {
         price = 149.99f,
     )
 
-    ScreenPreview(true) {
+    ScreenPreview(false) {
         ProductDetailView(
             productData = product,
             onBack = {},

@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.nattfall.fouras.authentication.AuthenticationScreen
 import com.nattfall.fouras.checkout.CheckoutScreen
+import com.nattfall.fouras.complete.CheckoutCompleteScreen
 import com.nattfall.fouras.home.HomeScreen
 import com.nattfall.fouras.productdetail.ProductDetailScreen
 import com.nattfall.fouras.settings.SettingsScreen
@@ -74,7 +75,7 @@ fun AppNavigation(
                     navController.popBackStack()
                 },
                 navigateToCheckoutFinalized = {
-                    navController.navigate(AppDestination.Home)
+                    navController.navigate(AppDestination.CheckoutComplete)
                 },
             )
         }
@@ -87,6 +88,19 @@ fun AppNavigation(
                 onLogout = {
                     navController.navigate(AppDestination.Authentication)
                 },
+            )
+        }
+
+        composable<AppDestination.CheckoutComplete> {
+            CheckoutCompleteScreen(
+                onComplete = {
+                    navController.navigate(AppDestination.Home) {
+                        popUpTo(AppDestination.CheckoutComplete) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                }
             )
         }
     }

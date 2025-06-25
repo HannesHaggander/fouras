@@ -1,6 +1,5 @@
 package com.nattfall.fouras.authentication
 
-import android.widget.EditText
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,9 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -20,15 +17,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,7 +45,6 @@ import com.nattfall.fouras.R
 import com.nattfall.fouras.ui.elements.ContrastText
 import com.nattfall.fouras.ui.elements.ContrastType
 import com.nattfall.fouras.ui.theme.AppButton
-import com.nattfall.fouras.ui.theme.FourasTheme
 import com.nattfall.fouras.ui.util.ScreenPreview
 
 @Composable
@@ -133,7 +124,7 @@ private fun AuthenticationView(
                     label = {
                         ContrastText(
                             text = stringResource(R.string.username),
-                            contrastType = ContrastType.Primary,
+                            contrastType = ContrastType.Surface,
                         )
                     },
                     modifier = Modifier.fillMaxWidth(),
@@ -156,7 +147,6 @@ private fun AuthenticationView(
                     colors = OutlinedTextFieldDefaults.colors( // Custom colors for better integration
                         focusedBorderColor = MaterialTheme.colorScheme.primary,
                         unfocusedBorderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
-
                     )
                 )
 
@@ -166,7 +156,7 @@ private fun AuthenticationView(
                     label = {
                         ContrastText(
                             text = stringResource(R.string.password),
-                            contrastType = ContrastType.Primary,
+                            contrastType = ContrastType.Surface,
                         )
                     },
                     modifier = Modifier.fillMaxWidth(),
@@ -202,7 +192,7 @@ private fun AuthenticationView(
                 ) {
                     ContrastText(
                         text = stringResource(R.string.login),
-                        contrastType = ContrastType.Surface,
+                        contrastType = ContrastType.Primary,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium
                     )
